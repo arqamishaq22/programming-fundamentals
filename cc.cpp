@@ -1,0 +1,97 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int bookID[5] = {101, 102, 103, 104, 105};
+    string bookName[5] = {"C++", "Java", "Python", "HTML", "Database"};
+    bool issued[5] = {false, false, false, false, false};
+    int choice, id, found = 0;
+
+    do {
+        cout << "\n===== Library Management System =====" << endl;
+        cout << "1. Show all books" << endl;
+        cout << "2. Search book by ID" << endl;
+        cout << "3. Issue book" << endl;
+        cout << "4. Return book" << endl;
+        cout << "5. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "\nAll Books:\n";
+                for (int i = 0; i < 5; i++) {
+                    cout << bookID[i] << " - " << bookName[i];
+                    if (issued[i])
+                        cout << " [Issued]";
+                    cout << endl;
+                }
+                break;
+
+            case 2:
+                cout << "Enter Book ID to search: ";
+                cin >> id;
+                found = 0;
+                for (int i = 0; i < 5; i++) {
+                    if (bookID[i] == id) {
+                        cout << "Book Found: " << bookName[i] << endl;
+                        found = 1;
+                        break;
+                    }
+                }
+                if (!found)
+                    cout << "Book not found!" << endl;
+                break;
+
+            case 3:
+                cout << "Enter Book ID to issue: ";
+                cin >> id;
+                found = 0;
+                for (int i = 0; i < 5; i++) {
+                    if (bookID[i] == id) {
+                        if (!issued[i]) {
+                            issued[i] = true;
+                            cout << "Book issued successfully!" << endl;
+                        } else {
+                            cout << "Book is already issued!" << endl;
+                        }
+                        found = 1;
+                        break;
+                    }
+                }
+                if (!found)
+                    cout << "Book not found!" << endl;
+                break;
+
+            case 4:
+                cout << "Enter Book ID to return: ";
+                cin >> id;
+                found = 0;
+                for (int i = 0; i < 5; i++) {
+                    if (bookID[i] == id) {
+                        if (issued[i]) {
+                            issued[i] = false;
+                            cout << "Book returned successfully!" << endl;
+                        } else {
+                            cout << "Book was not issued!" << endl;
+                        }
+                        found = 1;
+                        break;
+                    }
+                }
+                if (!found)
+                    cout << "Book not found!" << endl;
+                break;
+
+            case 5:
+                cout << "Exiting the system..." << endl;
+                break;
+
+            default:
+                cout << "Invalid choice! Try again." << endl;
+        }
+
+    } while (choice != 5);
+
+    return 0;
+}
